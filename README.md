@@ -4,7 +4,7 @@ Block ads in WebView easily for Android
 ## How do I use it?
 ### Step 1
 
-Add maven{} in your root build.gradle (project level) :
+Add the JitPack repository to your build.gradle(project level) file at the end of repositories:
 
 ```gradle
 allprojects {
@@ -23,7 +23,7 @@ Add the dependency in build.gradle(app level) file:
 
 ```gradle
 dependencies {
-    implementation ''
+    implementation 'com.github.ninhkobietnau:WebView-AdsBlock:1.0.0'
 }
 ```
 
