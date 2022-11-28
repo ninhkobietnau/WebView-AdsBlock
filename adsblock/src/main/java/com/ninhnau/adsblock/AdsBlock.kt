@@ -17,6 +17,7 @@ import java.net.URL
 class AdsBlock {
     private val AD_HOSTS_FILE = "host.txt"
     private val AD_HOSTS: HashSet<String> = HashSet()
+    private var isEnableAds = true
 
     @SuppressLint("StaticFieldLeak")
     fun initAdsBlock(context: Context) {
@@ -62,11 +63,19 @@ class AdsBlock {
     }
 
     fun isAd(url: String?): Boolean {
-        return try {
-            isAdHost(getHost(url)) || AD_HOSTS.contains(Uri.parse(url).lastPathSegment)
-        } catch (e: MalformedURLException) {
+        return if (isEnableAds) {
+            try {
+                isAdHost(getHost(url)) || AD_HOSTS.contains(Uri.parse(url).lastPathSegment)
+            } catch (e: MalformedURLException) {
+                false
+            }
+        } else {
             false
         }
+    }
+
+    fun isEnableBlock(enable: Boolean) {
+        isEnableAds = enable
     }
 
     fun createEmptyResource(): WebResourceResponse {
